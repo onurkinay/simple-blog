@@ -15,8 +15,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate(10);
-        $postColumns = Schema::getColumnListing('posts');
-        return view('admin.posts', compact('posts','postColumns'));
+        return view('admin.posts', compact('posts'));
     }
 
     /**
@@ -24,7 +23,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.post-create');
     }
 
     /**
@@ -32,7 +31,17 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'content' => 'required',
+            'category_id' => 'required',
+            'tags'=>'required',
+            'user_id' => 'required',
+        ]);
+
+        Post::create( $validated );
+        return redirect()->route('posts.index')->withSuccess('Posts created successfully.');
+
     }
 
     /**
