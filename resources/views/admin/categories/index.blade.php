@@ -20,15 +20,15 @@
                 @endsession
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Posts</h1>
-                <p class="mb-4"> <a name="" id="" class="btn btn-primary" href="{{ route('posts.create') }}"
-                        role="button">Add Post</a>
+                <h1 class="h3 mb-2 text-gray-800">Categories</h1>
+                <p class="mb-4"> <a name="" id="" class="btn btn-primary"
+                        href="{{ route('categories.create') }}" role="button">Add Category</a>
                 </p>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Posts</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Categories</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -36,9 +36,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Title</th>
-                                        <th>User</th>
-                                        <th>Created At</th>
+                                        <th>Name</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -48,22 +46,21 @@
                                     </tr>
                                 </tfoot>
                                 <tbody>
-                                    @forelse ($posts as $post)
+                                    @forelse ($categories as $category)
                                         <tr>
-                                            <th>{{ $post->id }}</th>
-                                            <th>{{ $post->title }}</th>
-                                            <th>{{ $post->user->name }}</th>
-                                            <th>{{ $post->created_at }}</th>
+                                            <th>{{ $category->id }}</th>
+                                            <th>{{ $category->name }}</th>
                                             <th>
-                                                <a href="{{ route('posts.edit', $post->id) }}"> <i class="fas fa-edit"></i>
+                                                <a href="{{ route('categories.edit', $category->id) }}"> <i
+                                                        class="fas fa-edit"></i>
                                                 </a>
-                                                <form action="{{ route('posts.destroy', $post->id) }}" method="post"
-                                                    id="form-id" style="display: inline">
+                                                <form action="{{ route('categories.destroy', $category->id) }}"
+                                                    method="post" id="form-id-{{ $category->id }}" style="display: inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <a href="#"
-                                                        onclick="document.getElementById('form-id').submit();"> <i
-                                                            class="fas fa-trash-alt"></i>
+                                                        onclick="document.getElementById('form-id-{{ $category->id }}').submit();">
+                                                        <i class="fas fa-trash-alt"></i>
                                                     </a>
                                                 </form>
                                             </th>
