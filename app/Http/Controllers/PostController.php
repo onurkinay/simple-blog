@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Schema;
 
@@ -23,7 +24,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Schema::hasTable('categories') ? Category::all() : [];
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -57,8 +59,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $categories = Schema::hasTable('categories') ? Category::all() : [];
         $post = Post::find($post->id);
-        return view('admin.posts.edit', compact('post'));
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**

@@ -49,9 +49,15 @@
                                 <textarea class="form-control" id="contentArea" rows="3" name="content">{{ $post->content }}</textarea>
                             </div>
 
-                            <div class="mb-3"><label for="exampleFormControlInput1">Category</label><input
-                                    class="form-control" id="exampleFormControlInput1" type="text" name="category_id"
-                                    placeholder="Category..." value={{ $post->category_id }}></div><!-- live search -->
+                            <div class="mb-3"><label for="exampleFormControlTextarea1">Category</label>
+                                <select name="category_id" class="form-control" id="categories">
+                                    @forelse ($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            @if ($category->id == $post->category_id) selected @endif>{{ $category->name }}</option>
+                                    @empty
+                                    @endforelse
+                                </select>
+                            </div>
 
                             <div class="mb-3"><label for="exampleFormControlInput1">Tags</label><input name="tags"
                                     class="form-control" id="exampleFormControlInput1" type="text" placeholder="Tags"
