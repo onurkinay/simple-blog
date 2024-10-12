@@ -57,22 +57,29 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $post = Post::find($post->id);
+
+        return view('admin.post-edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->update($request->all());
+        return redirect()->route('posts.index')->withSuccess('Posts updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        return redirect()->route('posts.index')
+          ->with('success', 'Post deleted successfully');
     }
 }

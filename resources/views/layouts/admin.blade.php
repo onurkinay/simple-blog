@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{{ route('admin') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -61,8 +61,9 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Posts</h6>
-                        <a class="collapse-item" href="buttons.html">Add Post</a>
-                        <a class="collapse-item" href="cards.html">Edit Post</a>
+                        <a class="collapse-item" href="{{ route('posts.index') }}">Show All Posts</a>
+                        <a class="collapse-item" href="{{ route('posts.create') }}">Add Post</a>
+
 
 
                     </div>
@@ -141,12 +142,6 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
-    <!-- Page level plugins -->
-    <script src="{{ asset('vendor/chart.js') }}/Chart.min.js')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
 
     <script src="{{ asset('tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
     <script>

@@ -13,10 +13,17 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
+                @session('success')
+                    <div class="alert alert-success" role="alert">
+                        {{ $value }}
+                    </div>
+                @endsession
 
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">Posts</h1>
-                <p class="mb-4">You can see all posts. </p>
+                <p class="mb-4"> <a name="" id="" class="btn btn-primary" href="{{ route('posts.create') }}"
+                        role="button">Add Post</a>
+                </p>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
@@ -32,6 +39,7 @@
                                         <th>Title</th>
                                         <th>User</th>
                                         <th>Created At</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -46,6 +54,19 @@
                                             <th>{{ $post->title }}</th>
                                             <th>{{ $post->user->name }}</th>
                                             <th>{{ $post->created_at }}</th>
+                                            <th>
+                                                <a href="{{ route('posts.edit', $post->id) }}"> <i class="fas fa-edit"></i>
+                                                </a>
+                                                <form action="{{ route('posts.destroy', $post->id) }}" method="post"
+                                                    id="form-id" style="display: inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <a href="#"
+                                                        onclick="document.getElementById('form-id').submit();"> <i
+                                                            class="fas fa-trash-alt"></i>
+                                                    </a>
+                                                </form>
+                                            </th>
                                         </tr>
                                     @empty
                                         <tr>
